@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springbootdemo.dao.UserRoleRelationMapper" >
+
+    <select id="getRelationById"  resultType="UserRoleRelation" resultMap="resultMap">
+        SELECT * FROM user_role_relation WHERE relation_id = #{relationId}
+    </select>
+
+    <insert  id = "insertRelation" parameterType="UserRoleRelation" keyProperty="relationId" useGeneratedKeys="false" keyColumn="relationId" >
+        INSERT INTO USER_ROLE_RELATION(RELATION_ID,USER_ID,ROLE_ID,COMMENT) values(#{relationId},#{userId},#{roleId},#{comment})
+    </insert>
+
+    <update id="updateRelation" parameterType="UserRoleRelation">
+        UPDATE USER_ROLE_RELATION SET USER_ID = #{userId},ROLE_ID = #{roleId}, COMMENT = #{comment} where RELATION_ID = #{relationId}
+    </update>
+
+    <delete id = "deleteRelationById" parameterType="UserRoleRelation">
+        delete from USER_ROLE_RELATION where RELATION_ID = #{relationId}
+    </delete>
+
+
+    <resultMap id="resultMap" type="UserRoleRelation">
+        <result column="relation_id" property="relationId"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="comment" property="comment"/>
+    </resultMap>
+
+</mapper>

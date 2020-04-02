@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springbootdemo.dao.RoleMapper" >
+
+    <select id="getRoleById" resultType="RoleInfo" resultMap="resultMap">
+        SELECT * FROM ROLE_INFO WHERE ROLE_ID = #{roleId}
+    </select>
+
+    <insert  id = "insertRole" parameterType="RoleInfo" keyProperty="roleId" useGeneratedKeys="false" keyColumn="roleId" >
+        INSERT INTO ROLE_INFO(ROLE_ID,ROLE_NAME,PERMISSION,COMMENT) values(#{roleId},#{roleName},
+        #{permission},#{comment})
+    </insert>
+
+    <update id="updateRole" parameterType="RoleInfo">
+        UPDATE ROLE_INFO SET ROLE_NAME = #{roleName}, COMMENT = #{comment},permission = #{permission} where ROLE_ID = #{roleId}
+    </update>
+
+    <delete id = "deleteRoleById" parameterType="RoleInfo">
+        delete from ROLE_INFO where ROLE_ID = #{RoleId}
+    </delete>
+
+    <resultMap id="resultMap" type="RoleInfo">
+        <result column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="permission" property="permission"/>
+        <result column="comment" property="comment"/>
+    </resultMap>
+
+</mapper>
